@@ -2,8 +2,8 @@ import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '../../../../errors/AppError';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   email: string;
@@ -38,7 +38,7 @@ class AuthenticateUserUseCase {
       throw new AppError('Email or password incorrect!');
     }
 
-    const token = sign({}, 'c8bf4e1d7b6bd276fa4875f9e6fd085c', {
+    const token = sign({}, '5fdc8c8fdac0c274bdcc1eece5b6ec61', {
       subject: user.id,
       expiresIn: '1d',
     });

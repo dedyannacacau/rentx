@@ -1,34 +1,10 @@
-version: '3.7'
-
+version: '3.3'
 services:
-  database:
+  db:
     image: postgres
-    container_name: database_ignite
-    restart: always
-    ports:
-      - 5434:5434
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=rentx
-    volumes:
-      - pgdata:/data/postgres
-    command: -p 5434
-
-  app:
-    build: .
-    container_name: rentx
-    restart: always
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: rentx
     ports:
-      - 3333:3333
-      - 9229:9229
-    volumes:
-      - .:/usr/app
-    links:
-      - database
-    depends_on:
-      - database
-
-volumes:
-  pgdata:
-    driver: local
+      - '5434:5432'
